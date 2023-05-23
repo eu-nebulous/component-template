@@ -1,0 +1,10 @@
+- project:
+    check:
+      jobs:
+        - nebulous-component-template-build-container-images
+    gate:
+      jobs:
+        - nebulous-component-template-upload-container-images
+    promote:
+      jobs:
+        - nebulous-component-template-promote-container-images

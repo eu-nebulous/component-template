@@ -1,0 +1,48 @@
+- secret:
+    name: nebulous-opendev-quay.io
+    data:
+      quay.io:
+        username: nebulous+opendev
+        password: !encrypted/pkcs1-oaep
+          - GBkjBjEWyZXkCGKTaNF8e7A2SwGfOuLMHV27+GReJjgh2+shxVfYyXwhVW3ZhP2/ICl4Q
+            vHPKtkqEYUNsUMLkPTWA7VEljZoyKUIZjEBJO9VoMWt79VYC0oS6qzjVmuCblev2nPFQT
+            jJLvdhyXh/uNbVlQ4X8H2ha0+8a7ClBneW6jA0Wu77cuAYnQRmHhtD+Mob+pTrxzyta37
+            wjA/97DMLqKd62M285LFdE1GGh2+PhfUuP//+wz7Ha3XJw1sMQziUWcEAWW7puUDpPI5b
+            Qpx3NCGInXH3utIpuFo76lTeN5OVAvjotqNWrngA2FRsNKUtH9DEqv5Prl0CuJRs9QEZm
+            PTJRwN/2LG97VtNCUdW4J5laNTCUR/cVIgTbh+YIvJWjAn4HqgUjS5SXBkR5nVA9pSlGJ
+            lu1y4WCuxieRdNBZfLcMJUSuLrbRY1De5c5cTcz6R64/2D+h2YTSdp4WzlzHvsEL97eZI
+            gNRhv3vOHKcWdWeVMXiaAjcBSuuXZGtcuH+pWte+cRYHjRIgjxlQMHAltgfA71JZI+xnh
+            SB6gmEwff5LL0fB1KULXBKhePnlC8xcr80hwubFzmAa4VcCQ+Fv/v6zbajUV9RfkAm26F
+            dp5S9xBoTTAlmcJ/cEz4Eq+URYe9jiU/PKYqEzLGhpKpGWzH86kpkWXJOzceCA=
+
+- job:
+    name: nebulous-component-template-build-container-images
+    parent: opendev-build-container-image
+    description: Build the container images.
+    vars: &image_vars
+      promote_container_image_method: intermediate-registry
+      promote_container_image_job: nebulous-component-template-upload-container-image
+      container_images:
+        - context: java-spring-boot-demo
+          registry: quay.io
+          repository: quay.io/nebulous/component-template-java-spring-boot-demo
+
+- job:
+    name: nebulous-component-template-upload-container-images
+    parent: opendev-upload-container-image
+    description: Build and upload the container images.
+    vars: *image_vars
+    secrets:
+      - name: container_registry_credentials
+        secret: nebulous-opendev-quay.io
+        pass-to-parent: true
+
+- job:
+    name: nebulous-component-template-promote-container-images
+    parent: opendev-promote-container-image
+    description: Promote previously uploaded container images.
+    vars: *image_vars
+    secrets:
+      - name: container_registry_credentials
+        secret: nebulous-opendev-quay.io
+        pass-to-parent: true
