@@ -21,7 +21,7 @@
     description: Build the container images.
     vars: &image_vars
       promote_container_image_method: intermediate-registry
-      promote_container_image_job: nebulous-component-template-upload-container-image
+      promote_container_image_job: nebulous-component-template-upload-container-images
       container_images:
         - context: java-spring-boot-demo
           registry: quay.io
