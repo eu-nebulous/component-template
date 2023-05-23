@@ -32,3 +32,11 @@
     vars:
       dockerfiles:
         - java-spring-boot-demo/Dockerfile
+
+- job:
+    name: nebulous-component-template-apply-helm-charts
+    parent: nebulous-apply-helm-charts
+    description: Deploy a Kubernetes cluster and apply charts.
+    vars:
+      helm_charts:
+        nebulous-component-template: ./charts/nebulous-component-template

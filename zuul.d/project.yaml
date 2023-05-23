@@ -1,11 +1,13 @@
 - project:
     check:
       jobs:
+        - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-build-container-images
         - nebulous-component-template-hadolint
         - nox-linters
     gate:
       jobs:
+        - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-upload-container-images
         - nebulous-component-template-hadolint
         - nox-linters
