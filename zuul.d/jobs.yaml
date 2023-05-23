@@ -2,6 +2,8 @@
     name: nebulous-component-template-build-container-images
     parent: nebulous-build-container-images
     description: Build the container images.
+    files: &image_files
+      - ^java-spring-boot-demo/
     vars: &image_vars
       promote_container_image_job: nebulous-component-template-upload-container-images
       container_images:
@@ -13,10 +15,12 @@
     name: nebulous-component-template-upload-container-images
     parent: nebulous-upload-container-images
     description: Build and upload the container images.
+    files: *image_files
     vars: *image_vars
 
 - job:
     name: nebulous-component-template-promote-container-images
     parent: nebulous-promote-container-images
     description: Promote previously uploaded container images.
+    files: *image_files
     vars: *image_vars
