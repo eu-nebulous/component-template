@@ -2,9 +2,11 @@
     check:
       jobs:
         - nebulous-component-template-build-container-images
+        - nox-linters
     gate:
       jobs:
         - nebulous-component-template-upload-container-images
+        - nox-linters
     promote:
       jobs:
         - nebulous-component-template-promote-container-images
