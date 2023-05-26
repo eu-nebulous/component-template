@@ -24,3 +24,11 @@
     description: Promote previously uploaded container images.
     files: *image_files
     vars: *image_vars
+
+- job:
+    name: nebulous-component-template-hadolint
+    parent: nebulous-hadolint
+    description: Run Hadolint on Dockerfile(s).
+    vars:
+      dockerfiles:
+        - java-spring-boot-demo/Dockerfile
