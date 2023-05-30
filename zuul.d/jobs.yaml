@@ -34,6 +34,14 @@
         - java-spring-boot-demo/Dockerfile
 
 - job:
+    name: nebulous-component-template-helm-lint
+    parent: nebulous-helm-lint
+    description: Run helm lint on Helm charts.
+    vars:
+      helm_charts:
+        - ./charts/nebulous-component-template
+
+- job:
     name: nebulous-component-template-apply-helm-charts
     parent: nebulous-apply-helm-charts
     description: Deploy a Kubernetes cluster and apply charts.
