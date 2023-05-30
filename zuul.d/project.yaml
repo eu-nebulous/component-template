@@ -1,7 +1,6 @@
 - project:
     check:
       jobs:
-        - chart-testing-lint
         - nebulous-component-template-helm-lint
         - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-build-container-images
@@ -9,7 +8,6 @@
         - nox-linters
     gate:
       jobs:
-        - chart-testing-lint
         - nebulous-component-template-helm-lint
         - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-upload-container-images
