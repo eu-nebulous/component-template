@@ -1,6 +1,7 @@
 - project:
     check:
       jobs:
+        - opendev-buildset-registry
         - nebulous-component-template-helm-lint
         - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-build-container-images
@@ -8,6 +9,7 @@
         - nox-linters
     gate:
       jobs:
+        - opendev-buildset-registry
         - nebulous-component-template-helm-lint
         - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-upload-container-images

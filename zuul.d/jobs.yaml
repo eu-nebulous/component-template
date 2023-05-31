@@ -1,6 +1,11 @@
 - job:
     name: nebulous-component-template-build-container-images
     parent: nebulous-build-container-images
+    dependencies:
+      - name: opendev-buildset-registry
+        soft: false
+    provides:
+      - java-spring-boot-demo-container-image
     description: Build the container images.
     files: &image_files
       - ^java-spring-boot-demo/
@@ -14,6 +19,11 @@
 - job:
     name: nebulous-component-template-upload-container-images
     parent: nebulous-upload-container-images
+    dependencies:
+      - name: opendev-buildset-registry
+        soft: false
+    provides:
+      - java-spring-boot-demo-container-image
     description: Build and upload the container images.
     files: *image_files
     vars: *image_vars
@@ -43,8 +53,25 @@
 
 - job:
     name: nebulous-component-template-apply-helm-charts
+    parent: opendev-buildset-registry-consumer
+
+- job:
+    name: nebulous-component-template-apply-helm-charts
     parent: nebulous-apply-helm-charts
+    dependencies:
+      - name: opendev-buildset-registry
+        soft: false
+      - name: nebulous-component-template-build-container-images
+        soft: true
+      - name: nebulous-component-template-upload-container-images
+        soft: true
+    requires:
+      - java-spring-boot-demo-container-image
     description: Deploy a Kubernetes cluster and apply charts.
+    roles:
+      - zuul: zuul/zuul-jobs
+    pre-run: playbooks/helm/pre.yaml
     vars:
+      kubernetes_runtime: cri-o
       helm_charts:
         nebulous-component-template: ./charts/nebulous-component-template
