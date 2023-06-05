@@ -1,10 +1,20 @@
 - project:
     check:
       jobs:
-        - noop
+        - opendev-buildset-registry
+        - nebulous-component-template-helm-lint
+        - nebulous-component-template-apply-helm-charts
+        - nebulous-component-template-build-container-images
+        - nebulous-component-template-hadolint
+        - nox-linters
     gate:
       jobs:
-        - noop
+        - opendev-buildset-registry
+        - nebulous-component-template-helm-lint
+        - nebulous-component-template-apply-helm-charts
+        - nebulous-component-template-upload-container-images
+        - nebulous-component-template-hadolint
+        - nox-linters
     promote:
       jobs:
-        - noop
+        - nebulous-component-template-promote-container-images
