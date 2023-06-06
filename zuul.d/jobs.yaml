@@ -53,10 +53,6 @@
 
 - job:
     name: nebulous-component-template-apply-helm-charts
-    parent: opendev-buildset-registry-consumer
-
-- job:
-    name: nebulous-component-template-apply-helm-charts
     parent: nebulous-apply-helm-charts
     dependencies:
       - name: opendev-buildset-registry
@@ -68,10 +64,6 @@
     requires:
       - java-spring-boot-demo-container-image
     description: Deploy a Kubernetes cluster and apply charts.
-    roles:
-      - zuul: zuul/zuul-jobs
-    pre-run: playbooks/helm/pre.yaml
     vars:
-      kubernetes_runtime: cri-o
       helm_charts:
         nebulous-component-template: ./charts/nebulous-component-template
