@@ -3,17 +3,19 @@
       jobs:
         - opendev-buildset-registry
         - nebulous-component-template-helm-lint
-        - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-build-container-images
         - nebulous-component-template-hadolint
+        # NOTE(yoctozepto): Replace with nebulous-apply-helm-charts.
+        - nebulous-component-template-apply-helm-charts
         - nox-linters
     gate:
       jobs:
         - opendev-buildset-registry
         - nebulous-component-template-helm-lint
-        - nebulous-component-template-apply-helm-charts
         - nebulous-component-template-upload-container-images
         - nebulous-component-template-hadolint
+        # NOTE(yoctozepto): Replace with nebulous-apply-helm-charts.
+        - nebulous-component-template-apply-helm-charts
         - nox-linters
     promote:
       jobs:
