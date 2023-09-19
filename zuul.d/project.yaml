@@ -5,7 +5,6 @@
         - nebulous-component-template-helm-lint
         - nebulous-component-template-build-container-images
         - nebulous-component-template-hadolint
-        # NOTE(yoctozepto): Replace with nebulous-platform-apply-helm-charts.
         - nebulous-component-template-apply-helm-charts
         - nox-linters
     gate:
@@ -14,7 +13,6 @@
         - nebulous-component-template-helm-lint
         - nebulous-component-template-upload-container-images
         - nebulous-component-template-hadolint
-        # NOTE(yoctozepto): Replace with nebulous-platform-apply-helm-charts.
         - nebulous-component-template-apply-helm-charts
         - nox-linters
     promote:
