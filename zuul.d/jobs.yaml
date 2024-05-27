@@ -8,6 +8,7 @@
       - nebulous-component-template-container-images
     description: Build the container images.
     files: &image_files
+      - ^zuul\.d/jobs\.yaml$
       - ^java-spring-boot-demo/
     vars: &image_vars
       promote_container_image_job: nebulous-component-template-upload-container-images
